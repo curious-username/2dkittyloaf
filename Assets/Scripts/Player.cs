@@ -7,6 +7,11 @@ public class Player : MonoBehaviour
     private float _speed = 4.0f;
     [SerializeField]
     private GameObject _playerWeaponPreFab;
+    [SerializeField]
+    private int _lives = 3;
+ 
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,6 +25,7 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space)){
             FireWeapon();
         }
+
     }
 
     private void CalculateMovement()
@@ -36,4 +42,19 @@ public class Player : MonoBehaviour
     {
         Instantiate(_playerWeaponPreFab, transform.position, Quaternion.identity);
     }
-}
+
+    public void Damage()
+    {
+        _lives--;
+
+        if (_lives == 0){
+             
+                Destroy(gameObject);
+            }
+            
+            
+        }
+    }
+
+
+

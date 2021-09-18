@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class PlayerWeapon : MonoBehaviour
 {
-    private float _speed = 8.0f;        
+    private float _speed = 8.0f;
+    private Enemy _enemy;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,4 +28,15 @@ public class PlayerWeapon : MonoBehaviour
         }
         
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.tag == "Enemy")
+        {
+            
+                Destroy(this.gameObject);
+            
+        }
+    }
+
 }
