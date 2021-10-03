@@ -6,12 +6,18 @@ public class Enemy : MonoBehaviour
 {
     private float _speed = 4.0f;
     private Player _player;
-
+    [SerializeField]
+    private GameObject _explosion;
+    
 
     // Start is called before the first frame update
     void Start()
     {
         _player = GameObject.Find("Player").GetComponent<Player>();
+        if(_player == null)
+        {
+            Debug.Log("_player null");
+        }
         
     }
 
@@ -27,6 +33,7 @@ public class Enemy : MonoBehaviour
         transform.Translate(Vector2.down * _speed * Time.deltaTime);
         if (gameObject.transform.position.y < -5.6f)
         {
+            
             Destroy(gameObject);
 
         }
@@ -38,6 +45,7 @@ public class Enemy : MonoBehaviour
         {
             if(_player != null)
             {
+
                 _player.Damage();
             }
             
@@ -47,7 +55,10 @@ public class Enemy : MonoBehaviour
 
         if(collision.tag == "PlayerWeapon")
         {
+
+            
             Destroy(gameObject);
+            Instantiate(_explosion, transform.position, Quaternion.identity);
             
         }
 
